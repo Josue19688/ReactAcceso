@@ -66,6 +66,19 @@ function NavbarPage() {
                     : "invisible opacity-0"
                 }`}
               >
+
+                <li role="none" className="flex items-stretch">
+                  
+                  <Link 
+                   role="menuitem"
+                   aria-current="page"
+                   aria-haspopup="false"
+                   tabIndex="0"
+                   className="flex items-center gap-2 py-4 text-blue-500 transition-colors duration-300 hover:text-blue-600 focus:bg-blue-50 focus:outline-none focus-visible:outline-none lg:px-8"
+                  
+                  to="/home">Home</Link>
+              
+                </li>
                 <li role="none" className="flex items-stretch">
                  
                     <Link 
@@ -77,18 +90,7 @@ function NavbarPage() {
                     to="/novedades">Novedades</Link>
                  
                 </li>
-                <li role="none" className="flex items-stretch">
-                  
-                     <Link 
-                      role="menuitem"
-                      aria-current="page"
-                      aria-haspopup="false"
-                      tabIndex="0"
-                      className="flex items-center gap-2 py-4 text-blue-500 transition-colors duration-300 hover:text-blue-600 focus:bg-blue-50 focus:outline-none focus-visible:outline-none lg:px-8"
-                     
-                     to="/home">Home</Link>
-                 
-                </li>
+               
                 <li role="none" className="flex items-stretch">
                   
                      <Link 
@@ -110,7 +112,7 @@ function NavbarPage() {
                       tabIndex="0"
                       className="flex items-center gap-2 py-4 text-blue-500 transition-colors duration-300 hover:text-blue-600 focus:bg-blue-50 focus:outline-none focus-visible:outline-none lg:px-8"
                      
-                     to="/proveedores">Proveedores</Link>
+                     to="/visitas">Proveedores</Link>
                  
                 </li>
                

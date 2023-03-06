@@ -1,11 +1,13 @@
+import React, { useState, useRef, useEffect } from "react"
+
 
 function HomePage() {
+
+
+
     return (
-      <div>
-       home page
-      
-    </div>
+        <>Home page</>
     );
-  }
-  
-  export default HomePage;
+}
+
+export default HomePage;
