@@ -84,6 +84,30 @@ function NovedadesPage() {
 
   const columns = [
     {
+      name: "VER",
+      button: true,
+      cell: (row) => (
+        
+  
+        
+        <button onClick={(e) => handleButtonClick(e, row.id)}
+        className="inline-flex h-8 items-center justify-center gap-2 self-center whitespace-nowrap rounded-full bg-blue-500 px-4 text-xs font-medium tracking-wide text-white transition duration-300 hover:bg-blue-600 focus:bg-blue-700 focus-visible:outline-none disabled:cursor-not-allowed disabled:border-blue-300 disabled:bg-blue-300 disabled:shadow-none">
+          <span className="relative only:-mx-4">
+           
+
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4">
+            <title id="title-45">Ver</title>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+
+          
+          </span>
+        </button>
+    
+        ),
+      },
+    {
       name: "DELETE",
       button: true,
       cell: (row) => (
@@ -133,21 +157,21 @@ function NovedadesPage() {
       ),
     },
     {
-        name: 'NOMBRE',
+        name: 'HORA',
         selector: row => row.title,
     },
     {
-        name: 'PUESTO',
+        name: 'FECHA',
         selector: row => row.year,
     },
     {
-      name: 'AGENTE',
-      selector: row => row.title,
+      name: 'PUESTO',
+      selector: row => row.agente,
   },
   {
-      name: 'DESCRIPCION',
-      selector: row => row.year,
-  },
+    name: 'DESCRIPCIÓN',
+    selector: row => row.descripcion,
+},
 ];
 
 const handleButtonClick = (e, id) => {
@@ -158,122 +182,138 @@ const handleButtonClick = (e, id) => {
 const data = [
     {
         id: 1,
-        title: 'Beetlejuice',
-        year: '1988',
-        agente: 'Beetlejuice',
-        descripcion: '1988',
+        title: '10:20',
+        year: '07-03-2023',
+        agente: 'Aguila 5',
+        
+preliminar: 'La arquitectura hexagonal TypeScript ',
+descripcion: 'La arquitectura hexagonal TypeScript ',
     },
     {
-        id: 2,
-        title: 'Beetlejuice',
-        year: '1988',
-        agente: 'Beetlejuice',
-        descripcion: '1988',
+      id: 2,
+      title: '10:20',
+      year: '07-03-2023',
+      agente: 'Aguila 5',
+      
+preliminar: 'La arquitectura hexagonal TypeScript ',
+descripcion: 'La arquitectura hexagonal TypeScript ',
     },
     {
       id: 3,
-      title: 'Beetlejuice',
-        year: '1988',
-        agente: 'Beetlejuice',
-        descripcion: '1988',
+      title: '10:20',
+      year: '07-03-2023',
+      agente: 'Aguila 5',
+     
+preliminar: 'La arquitectura hexagonal TypeScript ',
+descripcion: 'La arquitectura hexagonal TypeScript ',
   },
   {
-      id: 4,
-      title: 'Beetlejuice',
-        year: '1988',
-        agente: 'Beetlejuice',
-        descripcion: '1988',
+    id: 4,
+    title: '10:20',
+    year: '07-03-2023',
+    agente: 'Aguila 5',
+    
+preliminar: 'La arquitectura hexagonal TypeScript ',
+descripcion: 'La arquitectura hexagonal TypeScript ',
   },
   {
     id: 5,
-    title: 'Beetlejuice',
-        year: '1988',
-        agente: 'Beetlejuice',
-        descripcion: '1988',
+    title: '10:20',
+    year: '07-03-2023',
+    agente: 'Aguila 5',
+    
+preliminar: 'La arquitectura hexagonal TypeScript ',
+descripcion: 'La arquitectura hexagonal TypeScript ',
 },
 {
-    id: 6,
-    title: 'Beetlejuice',
-    year: '1988',
-    agente: 'Beetlejuice',
-    descripcion: '1988',
+  id: 6,
+  title: '10:20',
+  year: '07-03-2023',
+  agente: 'Aguila 5',
+  
+preliminar: 'La arquitectura hexagonal TypeScript ',
+descripcion: 'La arquitectura hexagonal TypeScript ',
 },
 {
   id: 7,
-  title: 'Beetlejuice',
-        year: '1988',
-        agente: 'Beetlejuice',
-        descripcion: '1988',
+  title: '10:20',
+  year: '07-03-2023',
+  agente: 'Aguila 5',
+  
+preliminar: 'La arquitectura hexagonal TypeScript ',
+descripcion: 'La arquitectura hexagonal TypeScript ',
 },
 {
-  id: 8,
-  title: 'Beetlejuice',
-        year: '1988',
-        agente: 'Beetlejuice',
-        descripcion: '1988',
-},
-{
-  id: 9,
-  title: 'Beetlejuice',
-        year: '1988',
-        agente: 'Beetlejuice',
-        descripcion: '1988',
-},
-{
-  id: 10,
-  title: 'Beetlejuice',
-  year: '1988',
-  agente: 'Beetlejuice',
-  descripcion: '1988',
-},
-{
-  id: 11,
-  title: 'Beetlejuice',
-        year: '1988',
-        agente: 'Beetlejuice',
-        descripcion: '1988',
-},
-{
-  id: 12,
-  title: 'Beetlejuice',
-  year: '1988',
-  agente: 'Beetlejuice',
-  descripcion: '1988',
+id: 8,
+title: '10:20',
+year: '07-03-2023',
+agente: 'Aguila 5',
+preliminar: 'La arquitectura hexagonal TypeScript ',
+descripcion: 'La arquitectura hexagonal TypeScript ',
 },
 {
   id: 9,
-  title: 'Beetlejuice',
-        year: '1988',
-        agente: 'Beetlejuice',
-        descripcion: '1988',
+  title: '10:20',
+  year: '07-03-2023',
+  agente: 'Aguila 5',
+  
+preliminar: 'La arquitectura hexagonal TypeScript ',
+descripcion: 'La arquitectura hexagonal TypeScript ',
 },
 {
-  id: 10,
-  title: 'Beetlejuice',
-  year: '1988',
-  agente: 'Beetlejuice',
-  descripcion: '1988',
+id: 10,
+title: '10:20',
+year: '07-03-2023',
+agente: 'Aguila 5',
+preliminar: 'La arquitectura hexagonal TypeScript ',
+descripcion: 'La arquitectura hexagonal TypeScript ',
 },
 {
   id: 11,
-  title: 'Beetlejuice',
-        year: '1988',
-        agente: 'Beetlejuice',
-        descripcion: '1988',
+  title: '10:20',
+  year: '07-03-2023',
+  agente: 'Aguila 5',
+  
+preliminar: 'La arquitectura hexagonal TypeScript ',
+descripcion: 'La arquitectura hexagonal TypeScript ',
 },
 {
-  id: 12,
-  title: 'Beetlejuice',
-  year: '1988',
-  agente: 'Beetlejuice',
-  descripcion: '1988',
+id: 12,
+title: '10:20',
+year: '07-03-2023',
+agente: 'Aguila 5',
+preliminar: 'La arquitectura hexagonal TypeScript ',
+descripcion: 'La arquitectura hexagonal TypeScript ',
 },
+
+{
+  id: 13,
+  title: '10:20',
+  year: '07-03-2023',
+  agente: 'Aguila 5',
+  
+preliminar: 'La arquitectura hexagonal TypeScript ',
+descripcion: 'La arquitectura hexagonal TypeScript ',
+},
+{
+id: 14,
+title: '10:20',
+year: '07-03-2023',
+agente: 'Aguila 5',
+preliminar: 'La arquitectura hexagonal TypeScript ',
+descripcion: 'La arquitectura hexagonal TypeScript ',
+},
+   
 ]
+
+
+
+
 
     return (
       <section>
       <div className="container px-6 m-auto p-6">
-        <div className="grid grid-cols-4 gap-6 md:grid-cols-8 lg:grid-cols-12">
+        <div className="grid grid-cols-4 gap-6 md:grid-cols-2 lg:grid-cols-12">
 
             
 
@@ -284,9 +324,22 @@ const data = [
 
                     <button
                       onClick={() => setIsShowing(true)}
-                      className="inline-flex h-12 items-center justify-center gap-2 justify-self-center whitespace-nowrap rounded-full bg-blue-50 px-6 text-sm font-medium tracking-wide text-blue-500 transition duration-300 hover:bg-blue-100 hover:text-blue-600 focus:bg-blue-200 focus:text-blue-700 focus-visible:outline-none disabled:cursor-not-allowed disabled:border-blue-300 disabled:bg-blue-100 disabled:text-blue-400 disabled:shadow-none transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110  duration-300"
+                      className="inline-flex h-12 m-3 items-center justify-center gap-2 justify-self-center whitespace-nowrap rounded-full bg-blue-50 px-6 text-sm font-medium tracking-wide text-blue-500 transition duration-300 hover:bg-blue-100 hover:text-blue-600 focus:bg-blue-200 focus:text-blue-700 focus-visible:outline-none disabled:cursor-not-allowed disabled:border-blue-300 disabled:bg-blue-100 disabled:text-blue-400 disabled:shadow-none transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110  duration-300"
                     >
                       <span>Crear Novedad</span>
+                    </button>
+
+                    <button
+                      onClick={() => setIsShowing(true)}
+                      className="inline-flex h-12 m-3 items-center justify-center gap-2 justify-self-center whitespace-nowrap rounded-full bg-blue-50 px-6 text-sm font-medium tracking-wide text-blue-500 transition duration-300 hover:bg-blue-100 hover:text-blue-600 focus:bg-blue-200 focus:text-blue-700 focus-visible:outline-none disabled:cursor-not-allowed disabled:border-blue-300 disabled:bg-blue-100 disabled:text-blue-400 disabled:shadow-none transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110  duration-300"
+                    >
+                      <span>Exportar Excel</span>
+                    </button>
+                    <button
+                      onClick={() => setIsShowing(true)}
+                      className="inline-flex h-12 m-3 items-center justify-center gap-2 justify-self-center whitespace-nowrap rounded-full bg-blue-50 px-6 text-sm font-medium tracking-wide text-blue-500 transition duration-300 hover:bg-blue-100 hover:text-blue-600 focus:bg-blue-200 focus:text-blue-700 focus-visible:outline-none disabled:cursor-not-allowed disabled:border-blue-300 disabled:bg-blue-100 disabled:text-blue-400 disabled:shadow-none transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110  duration-300"
+                    >
+                      <span>Exportar PDF</span>
                     </button>
 
                     {isShowing && typeof document !== "undefined"
@@ -340,36 +393,36 @@ const data = [
                             {/*        <!-- Modal body --> */}
                             <div id="content-4a" className="flex-1">
                               <div className="flex flex-col gap-4">
-                                {/*                <!-- Input nombre --> */}
+                                {/*                <!-- Input hora --> */}
                                 <div className="relative">
                                   <input
                                     id="id-b03"
-                                    type="email"
+                                    type="time"
                                     name="id-b03"
-                                    placeholder="your name"
+                                    placeholder="Ingrese la hora"
                                     className="peer relative h-10 w-full rounded border border-slate-200 px-4 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-blue-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
                                   />
                                   <label
                                     htmlFor="id-b03"
                                     className="absolute left-2 -top-2 z-[1] px-2 text-xs text-slate-400 transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-required:after:text-pink-500 peer-required:after:content-['\00a0*'] peer-invalid:text-pink-500 peer-focus:-top-2 peer-focus:text-xs peer-focus:text-blue-500 peer-invalid:peer-focus:text-pink-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
                                   >
-                                    Ingrese el nombre
+                                    Ingrese la hora
                                   </label>
                                 </div>
-                                {/*                <!-- Input field --> */}
+                                {/*                <!-- Input fecha --> */}
                                 <div className="relative my-2">
                                   <input
                                     id="id-b13"
-                                    type="text"
+                                    type="date"
                                     name="id-b13"
-                                    placeholder="your password"
+                                    placeholder="Ingrese la fecha"
                                     className="peer relative h-10 w-full rounded border border-slate-200 px-4 pr-12 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-blue-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
                                   />
                                   <label
                                     htmlFor="id-b13"
                                     className="absolute left-2 -top-2 z-[1] px-2 text-xs text-slate-400 transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-required:after:text-pink-500 peer-required:after:content-['\00a0*'] peer-invalid:text-pink-500 peer-focus:-top-2 peer-focus:text-xs peer-focus:text-blue-500 peer-invalid:peer-focus:text-pink-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
                                   >
-                                    Your password
+                                    Ingrese la fecha
                                   </label>
                                   
                                 </div>
@@ -379,34 +432,50 @@ const data = [
                                     id="id-b13"
                                     type="text"
                                     name="id-b13"
-                                    placeholder="your password"
+                                    placeholder="Ingrese el puesto"
                                     className="peer relative h-10 w-full rounded border border-slate-200 px-4 pr-12 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-blue-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
                                   />
                                   <label
                                     htmlFor="id-b13"
                                     className="absolute left-2 -top-2 z-[1] px-2 text-xs text-slate-400 transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-required:after:text-pink-500 peer-required:after:content-['\00a0*'] peer-invalid:text-pink-500 peer-focus:-top-2 peer-focus:text-xs peer-focus:text-blue-500 peer-invalid:peer-focus:text-pink-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
                                   >
-                                    Your password
+                                    Ingrese el puesto
                                   </label>
                                   
                                 </div>
 
-                                <div className="relative">
-                                  <textarea
-                                    id="id-01"
-                                    type="text"
-                                    name="id-01"
-                                    placeholder="Write your message"
-                                    rows="3"
-                                    className="peer relative w-full rounded border border-slate-200 px-4 py-2 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-blue-500 focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
-                                  ></textarea>
-                                  <label
-                                    for="id-01"
-                                    className="absolute left-2 -top-2 z-[1] cursor-text px-2 text-xs text-slate-400 transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-required:after:text-pink-500 peer-required:after:content-['\00a0*'] peer-invalid:text-pink-500 peer-focus:-top-2 peer-focus:cursor-default peer-focus:text-xs peer-focus:text-blue-500 peer-invalid:peer-focus:text-pink-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
-                                  >
-                                    Write your message
-                                  </label>
-                                </div>
+                                  <div className="relative">
+                                      <textarea
+                                        id="id-01"
+                                        type="text"
+                                        name="id-01"
+                                        placeholder="Descripción preliminar"
+                                        rows="3"
+                                        className="peer relative w-full rounded border border-slate-200 px-4 py-2 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-blue-500 focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
+                                      ></textarea>
+                                      <label
+                                        for="id-01"
+                                        className="absolute left-2 -top-2 z-[1] cursor-text px-2 text-xs text-slate-400 transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-required:after:text-pink-500 peer-required:after:content-['\00a0*'] peer-invalid:text-pink-500 peer-focus:-top-2 peer-focus:cursor-default peer-focus:text-xs peer-focus:text-blue-500 peer-invalid:peer-focus:text-pink-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
+                                      >
+                                        Descripción Preliminar
+                                      </label>
+                                  </div>
+                                  <div className="relative">
+                                      <textarea
+                                        id="id-01"
+                                        type="text"
+                                        name="id-01"
+                                        placeholder="Descripción final"
+                                        rows="3"
+                                        className="peer relative w-full rounded border border-slate-200 px-4 py-2 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-blue-500 focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
+                                      ></textarea>
+                                      <label
+                                        for="id-01"
+                                        className="absolute left-2 -top-2 z-[1] cursor-text px-2 text-xs text-slate-400 transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-required:after:text-pink-500 peer-required:after:content-['\00a0*'] peer-invalid:text-pink-500 peer-focus:-top-2 peer-focus:cursor-default peer-focus:text-xs peer-focus:text-blue-500 peer-invalid:peer-focus:text-pink-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
+                                      >
+                                        Descripción
+                                      </label>
+                                  </div>
                                 
                               </div>
                             </div>
@@ -428,10 +497,11 @@ const data = [
                     <DataTable
                 columns={columns}
                 data={data}
+                
                 direction="auto"
                 fixedHeaderScrollHeight="300px"
                 pagination
-                responsive
+                responsive="true"
                 subHeaderAlign="right"
                 subHeaderWrap
        
