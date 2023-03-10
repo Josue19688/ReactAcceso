@@ -76,7 +76,7 @@ function NavbarPage() {
                    tabIndex="0"
                    className="flex items-center gap-2 py-4 text-blue-500 transition-colors duration-300 hover:text-blue-600 focus:bg-blue-50 focus:outline-none focus-visible:outline-none lg:px-8"
                   
-                  to="/inicio/home">Home</Link>
+                  to="home">Home</Link>
               
                 </li>
                 <li role="none" className="flex items-stretch">
@@ -87,7 +87,7 @@ function NavbarPage() {
                          tabIndex="0"
                          className="flex items-center gap-2 py-4 transition-colors duration-300 hover:text-blue-500 focus:bg-blue-50 focus:outline-none focus-visible:outline-none lg:px-8"
                         
-                    to="/inicio/novedades">Novedades</Link>
+                    to="novedades">Novedades</Link>
                  
                 </li>
                
@@ -100,7 +100,7 @@ function NavbarPage() {
                       tabIndex="0"
                       className="flex items-center gap-2 py-4 text-blue-500 transition-colors duration-300 hover:text-blue-600 focus:bg-blue-50 focus:outline-none focus-visible:outline-none lg:px-8"
                      
-                     to="/inicio/archivo">Archivo</Link>
+                     to="archivo">Archivo</Link>
                  
                 </li>
                 <li role="none" className="flex items-stretch">
@@ -112,7 +112,7 @@ function NavbarPage() {
                       tabIndex="0"
                       className="flex items-center gap-2 py-4 text-blue-500 transition-colors duration-300 hover:text-blue-600 focus:bg-blue-50 focus:outline-none focus-visible:outline-none lg:px-8"
                      
-                     to="/inicio/visitas">Proveedores</Link>
+                     to="visitas">Proveedores</Link>
                  
                 </li>
                

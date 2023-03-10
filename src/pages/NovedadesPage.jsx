@@ -1,6 +1,9 @@
 import React, { useState, useRef, useEffect } from "react"
 import ReactDOM from "react-dom"
 import DataTable from 'react-data-table-component';
+import fetchToken from "../helpers/fetchToken";
+
+import Swal from "sweetalert2";
 
 function NovedadesPage() {
 
@@ -8,10 +11,54 @@ function NovedadesPage() {
 
   const wrapperRef = useRef(null)
 
+
+  //MANIPULACION DEL FORMULARIO DE MODAL  PARA EL INGRESO DE NOVEDADES
+const [form, setForm] = useState({
+  tipo:'',
+  hora:'',
+  fecha:'',
+  puesto:'',
+  preliminar:'',
+  descripcion:''
+});
+
+const onChange = ({target})=>{
+  const {name, value} = target;
+
+  setForm({
+    ...form,
+    [name]:value
+  })
+}
+
+const onSubmit =async (ev)=>{
+  ev.preventDefault();
+  const {tipo,hora,fecha,puesto,preliminar,descripcion} =  form;
+
+
+  const resp = await fetchToken('novedades/new',{tipo, hora,fecha,puesto, preliminar, descripcion},'POST');
+
+  if(resp.ok){
+
+    new Swal('Buen Trabajo!','Registro agregado correctamente!','success');
+
+    setForm({
+      tipo:'',
+      hora:'',
+      fecha:'',
+      puesto:'',
+      preliminar:'',
+      descripcion:''
+    })
+  }
+
+  console.log(resp);
   
+}
 
-
-
+const todoOk = ()=>{
+  return (form.hora.length>0 && form.fecha.length>0 && form.puesto.length>0 ) ? true :false;
+}
   
 
   useEffect(() => {
@@ -35,7 +82,7 @@ function NovedadesPage() {
         html.style.overflowY = "hidden"
 
         const focusableElements =
-          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+          'button, [href], input, select, textarea, [tabIndex]:not([tabIndex="-1"])'
 
         const modal = document.querySelector("#modal") // select the modal by it's id
 
@@ -87,9 +134,6 @@ function NovedadesPage() {
       name: "VER",
       button: true,
       cell: (row) => (
-        
-  
-        
         <button onClick={(e) => handleButtonClick(e, row.id)}
         className="inline-flex h-8 items-center justify-center gap-2 self-center whitespace-nowrap rounded-full bg-blue-500 px-4 text-xs font-medium tracking-wide text-white transition duration-300 hover:bg-blue-600 focus:bg-blue-700 focus-visible:outline-none disabled:cursor-not-allowed disabled:border-blue-300 disabled:bg-blue-300 disabled:shadow-none">
           <span className="relative only:-mx-4">
@@ -106,7 +150,7 @@ function NovedadesPage() {
         </button>
     
         ),
-      },
+    },
     {
       name: "DELETE",
       button: true,
@@ -122,56 +166,47 @@ function NovedadesPage() {
 
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4">
             <title id="title-45">Eliminar</title>
-  <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-</svg>
-
-          
+              <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+            </svg>
           </span>
         </button>
-     
-  
-  
-         
         ),
-      },
+    },
     {
     name: "EDITAR",
     button: true,
     cell: (row) => (
-      
-
-      
       <button onClick={(e) => handleButtonClick(e, row.id)}
       className="inline-flex h-8 items-center justify-center gap-2 self-center whitespace-nowrap rounded-full bg-blue-500 px-4 text-xs font-medium tracking-wide text-white transition duration-300 hover:bg-blue-600 focus:bg-blue-700 focus-visible:outline-none disabled:cursor-not-allowed disabled:border-blue-300 disabled:bg-blue-300 disabled:shadow-none">
         <span className="relative only:-mx-4">
-         
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4">
             <title id="title-45">Editar</title>
             <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
           </svg>
-
-        
         </span>
       </button>
-  
       ),
     },
     {
-        name: 'HORA',
-        selector: row => row.title,
+      name: 'TIPO',
+      selector: row => row.title,
     },
     {
-        name: 'FECHA',
-        selector: row => row.year,
+      name: 'HORA',
+      selector: row => row.year,
     },
     {
-      name: 'PUESTO',
+      name: 'FECHA',
       selector: row => row.agente,
-  },
-  {
-    name: 'DESCRIPCIÓN',
-    selector: row => row.descripcion,
-},
+    },
+    {
+      name: 'PRELIMINAR',
+      selector: row => row.preliminar,
+    },
+    {
+      name: 'DESCRIPCIÓN',
+      selector: row => row.descripcion,
+    },
 ];
 
 const handleButtonClick = (e, id) => {
@@ -179,132 +214,149 @@ const handleButtonClick = (e, id) => {
   console.log("Row Id", id);
 };
 
-const data = [
-    {
-        id: 1,
-        title: '10:20',
-        year: '07-03-2023',
-        agente: 'Aguila 5',
-        
-preliminar: 'La arquitectura hexagonal TypeScript ',
-descripcion: 'La arquitectura hexagonal TypeScript ',
-    },
-    {
-      id: 2,
-      title: '10:20',
-      year: '07-03-2023',
-      agente: 'Aguila 5',
-      
-preliminar: 'La arquitectura hexagonal TypeScript ',
-descripcion: 'La arquitectura hexagonal TypeScript ',
-    },
-    {
-      id: 3,
-      title: '10:20',
-      year: '07-03-2023',
-      agente: 'Aguila 5',
-     
-preliminar: 'La arquitectura hexagonal TypeScript ',
-descripcion: 'La arquitectura hexagonal TypeScript ',
-  },
-  {
-    id: 4,
-    title: '10:20',
-    year: '07-03-2023',
-    agente: 'Aguila 5',
-    
-preliminar: 'La arquitectura hexagonal TypeScript ',
-descripcion: 'La arquitectura hexagonal TypeScript ',
-  },
-  {
-    id: 5,
-    title: '10:20',
-    year: '07-03-2023',
-    agente: 'Aguila 5',
-    
-preliminar: 'La arquitectura hexagonal TypeScript ',
-descripcion: 'La arquitectura hexagonal TypeScript ',
-},
-{
-  id: 6,
-  title: '10:20',
-  year: '07-03-2023',
-  agente: 'Aguila 5',
-  
-preliminar: 'La arquitectura hexagonal TypeScript ',
-descripcion: 'La arquitectura hexagonal TypeScript ',
-},
-{
-  id: 7,
-  title: '10:20',
-  year: '07-03-2023',
-  agente: 'Aguila 5',
-  
-preliminar: 'La arquitectura hexagonal TypeScript ',
-descripcion: 'La arquitectura hexagonal TypeScript ',
-},
-{
-id: 8,
-title: '10:20',
-year: '07-03-2023',
-agente: 'Aguila 5',
-preliminar: 'La arquitectura hexagonal TypeScript ',
-descripcion: 'La arquitectura hexagonal TypeScript ',
-},
-{
-  id: 9,
-  title: '10:20',
-  year: '07-03-2023',
-  agente: 'Aguila 5',
-  
-preliminar: 'La arquitectura hexagonal TypeScript ',
-descripcion: 'La arquitectura hexagonal TypeScript ',
-},
-{
-id: 10,
-title: '10:20',
-year: '07-03-2023',
-agente: 'Aguila 5',
-preliminar: 'La arquitectura hexagonal TypeScript ',
-descripcion: 'La arquitectura hexagonal TypeScript ',
-},
-{
-  id: 11,
-  title: '10:20',
-  year: '07-03-2023',
-  agente: 'Aguila 5',
-  
-preliminar: 'La arquitectura hexagonal TypeScript ',
-descripcion: 'La arquitectura hexagonal TypeScript ',
-},
-{
-id: 12,
-title: '10:20',
-year: '07-03-2023',
-agente: 'Aguila 5',
-preliminar: 'La arquitectura hexagonal TypeScript ',
-descripcion: 'La arquitectura hexagonal TypeScript ',
-},
 
-{
-  id: 13,
-  title: '10:20',
-  year: '07-03-2023',
-  agente: 'Aguila 5',
+const {data, setData} = useState({novedades:[]});
+
+
+useEffect(()=>{
+
+
+  const fetchData = async()=>{
+    const resp = await fetchToken('novedades');
+    console.log(resp)
+    
+  }
   
-preliminar: 'La arquitectura hexagonal TypeScript ',
-descripcion: 'La arquitectura hexagonal TypeScript ',
-},
-{
-id: 14,
-title: '10:20',
-year: '07-03-2023',
-agente: 'Aguila 5',
-preliminar: 'La arquitectura hexagonal TypeScript ',
-descripcion: 'La arquitectura hexagonal TypeScript ',
-},
+  fetchData();
+});
+
+
+// const data = [
+//     {
+//         id: 1,
+//         title: '10:20',
+//         year: '07-03-2023',
+//         agente: 'Aguila 5',
+        
+// preliminar: 'La arquitectura hexagonal TypeScript ',
+// descripcion: 'La arquitectura hexagonal TypeScript ',
+//     },
+//     {
+//       id: 2,
+//       title: '10:20',
+//       year: '07-03-2023',
+//       agente: 'Aguila 5',
+      
+// preliminar: 'La arquitectura hexagonal TypeScript ',
+// descripcion: 'La arquitectura hexagonal TypeScript ',
+//     },
+//     {
+//       id: 3,
+//       title: '10:20',
+//       year: '07-03-2023',
+//       agente: 'Aguila 5',
+     
+// preliminar: 'La arquitectura hexagonal TypeScript ',
+// descripcion: 'La arquitectura hexagonal TypeScript ',
+//   },
+//   {
+//     id: 4,
+//     title: '10:20',
+//     year: '07-03-2023',
+//     agente: 'Aguila 5',
+    
+// preliminar: 'La arquitectura hexagonal TypeScript ',
+// descripcion: 'La arquitectura hexagonal TypeScript ',
+//   },
+//   {
+//     id: 5,
+//     title: '10:20',
+//     year: '07-03-2023',
+//     agente: 'Aguila 5',
+    
+// preliminar: 'La arquitectura hexagonal TypeScript ',
+// descripcion: 'La arquitectura hexagonal TypeScript ',
+// },
+// {
+//   id: 6,
+//   title: '10:20',
+//   year: '07-03-2023',
+//   agente: 'Aguila 5',
+  
+// preliminar: 'La arquitectura hexagonal TypeScript ',
+// descripcion: 'La arquitectura hexagonal TypeScript ',
+// },
+// {
+//   id: 7,
+//   title: '10:20',
+//   year: '07-03-2023',
+//   agente: 'Aguila 5',
+  
+// preliminar: 'La arquitectura hexagonal TypeScript ',
+// descripcion: 'La arquitectura hexagonal TypeScript ',
+// },
+// {
+// id: 8,
+// title: '10:20',
+// year: '07-03-2023',
+// agente: 'Aguila 5',
+// preliminar: 'La arquitectura hexagonal TypeScript ',
+// descripcion: 'La arquitectura hexagonal TypeScript ',
+// },
+// {
+//   id: 9,
+//   title: '10:20',
+//   year: '07-03-2023',
+//   agente: 'Aguila 5',
+  
+// preliminar: 'La arquitectura hexagonal TypeScript ',
+// descripcion: 'La arquitectura hexagonal TypeScript ',
+// },
+// {
+// id: 10,
+// title: '10:20',
+// year: '07-03-2023',
+// agente: 'Aguila 5',
+// preliminar: 'La arquitectura hexagonal TypeScript ',
+// descripcion: 'La arquitectura hexagonal TypeScript ',
+// },
+// {
+//   id: 11,
+//   title: '10:20',
+//   year: '07-03-2023',
+//   agente: 'Aguila 5',
+  
+// preliminar: 'La arquitectura hexagonal TypeScript ',
+// descripcion: 'La arquitectura hexagonal TypeScript ',
+// },
+// {
+// id: 12,
+// title: '10:20',
+// year: '07-03-2023',
+// agente: 'Aguila 5',
+// preliminar: 'La arquitectura hexagonal TypeScript ',
+// descripcion: 'La arquitectura hexagonal TypeScript ',
+// },
+
+// {
+//   id: 13,
+//   title: '10:20',
+//   year: '07-03-2023',
+//   agente: 'Aguila 5',
+  
+// preliminar: 'La arquitectura hexagonal TypeScript ',
+// descripcion: 'La arquitectura hexagonal TypeScript ',
+// },
+// {
+// id: 14,
+// title: '10:20',
+// year: '07-03-2023',
+// agente: 'Aguila 5',
+// preliminar: 'La arquitectura hexagonal TypeScript ',
+// descripcion: 'La arquitectura hexagonal TypeScript ',
+// },
    
-]
+// ]
 
 
 
@@ -348,7 +400,7 @@ descripcion: 'La arquitectura hexagonal TypeScript ',
                           className="fixed top-0 left-0 z-20 flex h-screen w-screen items-center justify-center bg-slate-300/20 backdrop-blur-sm"
                           aria-labelledby="header-4a content-4a"
                           aria-modal="true"
-                          tabindex="-1"
+                          tabIndex="-1"
                           role="dialog"
                         >
                           {/*    <!-- Modal --> */}
@@ -391,100 +443,131 @@ descripcion: 'La arquitectura hexagonal TypeScript ',
                               </button>
                             </header>
                             {/*        <!-- Modal body --> */}
+                            <form onSubmit={onSubmit}>
                             <div id="content-4a" className="flex-1">
                               <div className="flex flex-col gap-4">
-                                {/*                <!-- Input hora --> */}
-                                <div className="relative">
-                                  <input
-                                    id="id-b03"
-                                    type="time"
-                                    name="id-b03"
-                                    placeholder="Ingrese la hora"
-                                    className="peer relative h-10 w-full rounded border border-slate-200 px-4 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-blue-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
-                                  />
-                                  <label
-                                    htmlFor="id-b03"
-                                    className="absolute left-2 -top-2 z-[1] px-2 text-xs text-slate-400 transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-required:after:text-pink-500 peer-required:after:content-['\00a0*'] peer-invalid:text-pink-500 peer-focus:-top-2 peer-focus:text-xs peer-focus:text-blue-500 peer-invalid:peer-focus:text-pink-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
-                                  >
-                                    Ingrese la hora
-                                  </label>
-                                </div>
-                                {/*                <!-- Input fecha --> */}
-                                <div className="relative my-2">
-                                  <input
-                                    id="id-b13"
-                                    type="date"
-                                    name="id-b13"
-                                    placeholder="Ingrese la fecha"
-                                    className="peer relative h-10 w-full rounded border border-slate-200 px-4 pr-12 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-blue-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
-                                  />
-                                  <label
-                                    htmlFor="id-b13"
-                                    className="absolute left-2 -top-2 z-[1] px-2 text-xs text-slate-400 transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-required:after:text-pink-500 peer-required:after:content-['\00a0*'] peer-invalid:text-pink-500 peer-focus:-top-2 peer-focus:text-xs peer-focus:text-blue-500 peer-invalid:peer-focus:text-pink-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
-                                  >
-                                    Ingrese la fecha
-                                  </label>
-                                  
-                                </div>
-
-                                <div className="relative my-2">
-                                  <input
-                                    id="id-b13"
-                                    type="text"
-                                    name="id-b13"
-                                    placeholder="Ingrese el puesto"
-                                    className="peer relative h-10 w-full rounded border border-slate-200 px-4 pr-12 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-blue-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
-                                  />
-                                  <label
-                                    htmlFor="id-b13"
-                                    className="absolute left-2 -top-2 z-[1] px-2 text-xs text-slate-400 transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-required:after:text-pink-500 peer-required:after:content-['\00a0*'] peer-invalid:text-pink-500 peer-focus:-top-2 peer-focus:text-xs peer-focus:text-blue-500 peer-invalid:peer-focus:text-pink-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
-                                  >
-                                    Ingrese el puesto
-                                  </label>
-                                  
-                                </div>
-
-                                  <div className="relative">
-                                      <textarea
-                                        id="id-01"
+                              
+                              <div className="relative">
+                                      <input
+                                        id="tipo"
                                         type="text"
-                                        name="id-01"
-                                        placeholder="Descripción preliminar"
-                                        rows="3"
-                                        className="peer relative w-full rounded border border-slate-200 px-4 py-2 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-blue-500 focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
-                                      ></textarea>
+                                        name="tipo"
+                                        value={form.tipo}
+                                        onChange={onChange}
+                                        placeholder="Ingrese el tipo de novedad"
+                                        className="peer relative h-10 w-full rounded border border-slate-200 px-4 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-blue-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
+                                      />
                                       <label
-                                        for="id-01"
-                                        className="absolute left-2 -top-2 z-[1] cursor-text px-2 text-xs text-slate-400 transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-required:after:text-pink-500 peer-required:after:content-['\00a0*'] peer-invalid:text-pink-500 peer-focus:-top-2 peer-focus:cursor-default peer-focus:text-xs peer-focus:text-blue-500 peer-invalid:peer-focus:text-pink-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
+                                        htmlFor="tipo"
+                                        className="absolute left-2 -top-2 z-[1] px-2 text-xs text-slate-400 transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-required:after:text-pink-500 peer-required:after:content-['\00a0*'] peer-invalid:text-pink-500 peer-focus:-top-2 peer-focus:text-xs peer-focus:text-blue-500 peer-invalid:peer-focus:text-pink-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
                                       >
-                                        Descripción Preliminar
+                                        Tipo Novedad
                                       </label>
-                                  </div>
-                                  <div className="relative">
-                                      <textarea
-                                        id="id-01"
+                                    </div>
+                               
+                                    <div className="relative">
+                                      <input
+                                        id="hora"
+                                        type="time"
+                                        name="hora"
+                                        value={form.hora}
+                                        onChange={onChange}
+                                        placeholder="Ingrese la hora"
+                                        className="peer relative h-10 w-full rounded border border-slate-200 px-4 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-blue-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
+                                      />
+                                      <label
+                                        htmlFor="hora"
+                                        className="absolute left-2 -top-2 z-[1] px-2 text-xs text-slate-400 transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-required:after:text-pink-500 peer-required:after:content-['\00a0*'] peer-invalid:text-pink-500 peer-focus:-top-2 peer-focus:text-xs peer-focus:text-blue-500 peer-invalid:peer-focus:text-pink-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
+                                      >
+                                        Ingrese la hora
+                                      </label>
+                                    </div>
+                                  
+                                    <div className="relative my-2">
+                                      <input
+                                        id="fecha"
+                                        type="date"
+                                        name="fecha"
+                                        value={form.fecha}
+                                        onChange={onChange}
+                                        placeholder="Ingrese la fecha"
+                                        className="peer relative h-10 w-full rounded border border-slate-200 px-4 pr-12 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-blue-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
+                                      />
+                                      <label
+                                        htmlFor="fecha"
+                                        className="absolute left-2 -top-2 z-[1] px-2 text-xs text-slate-400 transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-required:after:text-pink-500 peer-required:after:content-['\00a0*'] peer-invalid:text-pink-500 peer-focus:-top-2 peer-focus:text-xs peer-focus:text-blue-500 peer-invalid:peer-focus:text-pink-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
+                                      >
+                                        Ingrese la fecha
+                                      </label>
+                                      
+                                    </div>
+
+                                    <div className="relative my-2">
+                                      <input
+                                        id="puesto"
                                         type="text"
-                                        name="id-01"
-                                        placeholder="Descripción final"
-                                        rows="3"
-                                        className="peer relative w-full rounded border border-slate-200 px-4 py-2 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-blue-500 focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
-                                      ></textarea>
+                                        name="puesto"
+                                        value={form.puesto}
+                                        onChange={onChange}
+                                        placeholder="Ingrese el puesto"
+                                        className="peer relative h-10 w-full rounded border border-slate-200 px-4 pr-12 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-blue-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
+                                      />
                                       <label
-                                        for="id-01"
-                                        className="absolute left-2 -top-2 z-[1] cursor-text px-2 text-xs text-slate-400 transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-required:after:text-pink-500 peer-required:after:content-['\00a0*'] peer-invalid:text-pink-500 peer-focus:-top-2 peer-focus:cursor-default peer-focus:text-xs peer-focus:text-blue-500 peer-invalid:peer-focus:text-pink-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
+                                        htmlFor="puesto"
+                                        className="absolute left-2 -top-2 z-[1] px-2 text-xs text-slate-400 transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-required:after:text-pink-500 peer-required:after:content-['\00a0*'] peer-invalid:text-pink-500 peer-focus:-top-2 peer-focus:text-xs peer-focus:text-blue-500 peer-invalid:peer-focus:text-pink-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
                                       >
-                                        Descripción
+                                        Ingrese el puesto
                                       </label>
-                                  </div>
-                                
+                                      
+                                    </div>
+
+                                      <div className="relative">
+                                          <textarea
+                                            id="preliminar"
+                                            type="text"
+                                            name="preliminar"
+                                            value={form.preliminar}
+                                            onChange={onChange}
+                                            placeholder="Descripción preliminar"
+                                            rows="3"
+                                            className="peer relative w-full rounded border border-slate-200 px-4 py-2 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-blue-500 focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
+                                          ></textarea>
+                                          <label
+                                            htmlFor="preliminar"
+                                            className="absolute left-2 -top-2 z-[1] cursor-text px-2 text-xs text-slate-400 transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-required:after:text-pink-500 peer-required:after:content-['\00a0*'] peer-invalid:text-pink-500 peer-focus:-top-2 peer-focus:cursor-default peer-focus:text-xs peer-focus:text-blue-500 peer-invalid:peer-focus:text-pink-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
+                                          >
+                                            Descripción Preliminar
+                                          </label>
+                                      </div>
+                                      <div className="relative">
+                                          <textarea
+                                            id="descripcion"
+                                            type="text"
+                                            name="descripcion"
+                                            value={form.descripcion}
+                                            onChange={onChange}
+                                            placeholder="Descripción final"
+                                            rows="3"
+                                            className="peer relative w-full rounded border border-slate-200 px-4 py-2 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-blue-500 focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
+                                          ></textarea>
+                                          <label
+                                            htmlFor="descripcion"
+                                            className="absolute left-2 -top-2 z-[1] cursor-text px-2 text-xs text-slate-400 transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-required:after:text-pink-500 peer-required:after:content-['\00a0*'] peer-invalid:text-pink-500 peer-focus:-top-2 peer-focus:cursor-default peer-focus:text-xs peer-focus:text-blue-500 peer-invalid:peer-focus:text-pink-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
+                                          >
+                                            Descripción
+                                          </label>
+                                      </div>
+                               
+                        
                               </div>
                             </div>
                             {/*        <!-- Modal actions --> */}
-                            <div className="flex justify-center gap-2">
+                            <div className="flex justify-center gap-2"  disabled={!todoOk()}>
                               <button className="inline-flex h-10 w-full items-center justify-center gap-2 whitespace-nowrap rounded bg-blue-500 px-5 text-sm font-medium tracking-wide text-white transition duration-300 hover:bg-blue-600 focus:bg-blue-700 focus-visible:outline-none disabled:cursor-not-allowed disabled:border-blue-300 disabled:bg-blue-300 disabled:shadow-none">
                                 <span>Guardar</span>
                               </button>
                             </div>
+                            </form>
                           </div>
                         </div>,
                         document.body

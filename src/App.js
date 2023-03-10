@@ -9,9 +9,12 @@ function App() {
 
   
   return (
-    <AuthProvider>
-       <AppRoutes/>
-    </AuthProvider>
+    
+      <AuthProvider>
+        <AppRoutes/>
+      </AuthProvider>
+   
+    
   );
 }
 
