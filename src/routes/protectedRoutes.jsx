@@ -16,10 +16,10 @@ function ProtectedRoutes() {
     <div className="container mx-auto">
         <NavbarPage/>
         <Routes>
-            <Route  path="home" element={<HomePage />} />
-            <Route  path="novedades" element={<NovedadesPage />} />
-            <Route  path="visitas" element={<VisitasPage />} />
-            <Route  path="archivo" element={<ArchivoPage />} />
+            <Route path="home"      element={<HomePage />} />
+            <Route path="novedades" element={<NovedadesPage />} />
+            <Route path="visitas" element={<VisitasPage />} />
+            <Route path="archivo" element={<ArchivoPage />} />
         </Routes>
     </div>
   );
